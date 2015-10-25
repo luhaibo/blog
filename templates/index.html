@@ -1,0 +1,127 @@
+
+
+{% include '/head.html' %}
+
+<div id="content" class="clearfix">
+	<div id="main" class="col620 clearfix" role="main">
+		{% for a in articles %}
+		<article id="post-71" class="post-71 post type-post status-publish format-standard hentry category-9 tag-10 tag-11 tag-12 tag-13">
+			<header class="entry-header">
+
+				
+				<h1 class="entry-title">
+					<a rel="bookmark" title="Permalink to {{a.post_title}}" href="/article/{{a.id}}">{{a.post_title}}</a>
+				</h1>
+
+								<div class="entry-meta">
+					<span class="sep">Posted on </span>
+					<a rel="bookmark" title="title" href="/article/{{a.id}}">
+						<time class="entry-date" datetime="2013-01-01T00:00:00+00:00">{{ a.post_create_time|safe }}</time>
+					</a>
+					<span class="byline">
+					<span class="sep"> by </span>
+					<span class="author vcard">
+						<a class="url fn n" rel="author" title="View all posts by dan" href="/">dan</a>
+					</span>
+					</span>
+					<span class="sep" style="float:right"><p><a class="more" href="/article/{{a.id}}">阅读全文 &raquo;</a></p></span>
+					<span class="sep"  style="float:right"> <a title="{{a.post_title}}" href="/article/{{a.id}}#comments">{{a.comment_count}}条评论</a></span>
+					<span class="sep" style="float:right"> {{ a.view_num }}人阅读</span>
+
+
+				</div>
+			</header>
+			<div class="entry-content post_content">
+				{% if (a.post_content|length)>3000 %}
+    				{{ (a.post_content|safe|html2textile)[:3000] }} ...
+				{% else %}
+    				{{ (a.post_content|safe) }}
+				{% endif %}
+				
+				<p><a class="more" href="/article/{{a.id}}" style="float:right">阅读全文 &raquo;</a></p>
+				
+			</div>
+
+				
+			<footer class="entry-meta">
+				<span class="cat-links">
+Posted in
+<a rel="tag" title="查看 {{a.categorys.category_name}} 中的全部文章" href="/category/{{a.categorys.id}}">{{a.categorys.category_name}}</a>
+</span>
+<span class="sep"> | </span>
+<span class="tag-links">
+Tagged:
+{% for tag in a.tags %}
+			<span><a rel="tag" href="/tag/{{tag.id}}">{{tag.name}}</a></span>
+		
+			{% endfor %}
+
+</span>
+
+
+
+
+
+
+
+			</footer>
+		</article>
+
+
+
+
+
+
+
+
+
+
+
+	{% endfor %}
+	<div id="Pagination" class="pagination">
+	<a href="/page/1" >首页 &raquo;</a>
+    {% for i in pagination %}
+        {% if i==pageid %}
+	    <span class="current">{{pageid}}</span>
+        {% else %}
+	    <a href="/page/{{i}}" >{{i}}</a>
+        {% endif %}
+    {% endfor %}
+	<span>...</span>
+	<a href="/page/{{last_page}}" >末页 &raquo;</a>
+</div>
+
+
+	</div>
+
+<div id="sidebar" class="widget-area col300" role="complementary">
+<div id="sidebar-wrap" class="clearfix">
+	{% include '/sider.html' %}
+</div>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<footer id="colophon" role="contentinfo">
+<div id="site-generator">
+{% include '/foot.html' %}
+</div>
+</footer>
+
+</div>
+
+
+
+
+</body>
+
